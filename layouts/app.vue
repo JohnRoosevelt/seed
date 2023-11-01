@@ -12,7 +12,7 @@ main.min-h-screen.flex-cc.flex-col
       .i-carbon-light.text-4xl
       .text-xs.uppercase books
     NuxtLink(to="/")
-      .i-carbon-home
+      .i-icon-logo.text-5xl
     NuxtLink(to="/music" active-class="text-blue-600").flex-cc.flex-col
       .i-carbon-music.text-4xl
       .text-xs.uppercase music
