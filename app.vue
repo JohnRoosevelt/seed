@@ -20,8 +20,16 @@ html, body , #__nuxt{
   padding: 0;
 }
 
+html::-webkit-scrollbar {
+  display: none;
+}
+
 html.dark {
   background: #222;
   color: white;
+}
+
+a {
+  -webkit-tap-highlight-color:rgba(255,255,255,0);
 }
 </style>
