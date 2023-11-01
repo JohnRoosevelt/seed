@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { appName as _appName } from '~/constants'
+import { appName } from '~/constants'
 
+const _name = appName
 // const top = ref<HTMLElement | null>(null)
 // let opacity = $(useCssVar('--un-bg-opacity', top))
 // let blur = $(useCssVar('--blur', top))
@@ -32,7 +33,7 @@ main.min-h-screen.flex-cc.flex-col
   )
     NuxtLink(to="/").flex-cc.gap-1
       .i-icon-logo.text-5xl
-      .hidden(md="block").text-2xl {{_appName}}
+      .hidden(md="block").text-2xl {{_name}}
     NuxtLink(to="/bible").flex-cc.gap-1
       .text-base Go to use
       .i-carbon-connect-target.text-3xl
