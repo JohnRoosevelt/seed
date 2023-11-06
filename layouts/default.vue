@@ -20,6 +20,43 @@ const _name = appName
 //     })
 //   }
 // })
+
+let _showInstall = $$(true)
+let _installPrompt: any = null
+onMounted(async () => {
+  console.log('xxxx mouted')
+  const relatedApps = await globalThis.navigator.getInstalledRelatedApps()
+
+  // Search for a specific installed platform-specific app
+  const psApp = relatedApps.find(app => app.id === 'com.example.myapp')
+
+  if (psApp) {
+    // Update UI as appropriate
+    _showInstall = false
+  }
+  console.log(relatedApps)
+
+  window.addEventListener('beforeinstallprompt', (event) => {
+    console.log('install before')
+    event.preventDefault()
+    _installPrompt = event
+    _showInstall = true
+  })
+  window.addEventListener('appinstalled', () => {
+    console.log('install after')
+    _installPrompt = null
+    _showInstall = false
+  })
+})
+
+async function _install() {
+  console.log('install .....', _installPrompt)
+  if (!_installPrompt)
+    return
+
+  const result = await _installPrompt.prompt()
+  console.log(`Install prompt was: ${result.outcome}`)
+}
 </script>
 
 <template lang="pug">
@@ -34,9 +71,13 @@ main.min-h-screen.flex-cc.flex-col
     NuxtLink(to="/").flex-cc.gap-1
       .i-icon-logo.text-5xl
       .hidden(md="block").text-2xl {{_name}}
-    NuxtLink(to="/bible").flex-cc.gap-1
-      .text-base Go to use
-      .i-carbon-connect-target.text-3xl
+    ClientOnly
+      .text-base.flex-cc.gap-1(v-if="_showInstall" @click="_install")
+        span install
+        .i-carbon-app.text-3xl
+      NuxtLink(to="/bible" v-else).text-base.flex-cc.gap-1
+        span Go to use
+        .i-carbon-connect-target.text-3xl
 
   .flex-1.w-full
     slot
