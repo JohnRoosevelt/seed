@@ -21,7 +21,7 @@ const _name = appName
 //   }
 // })
 
-let _showInstall = $$(false)
+let _showInstall = $ref(false)
 let _installPrompt: any = null
 onMounted(async () => {
   console.log('xxxx mouted')
@@ -56,7 +56,6 @@ async function _install() {
 
   const result = await _installPrompt.prompt()
   console.log(`Install prompt was: ${result.outcome}`)
-  _showInstall = false
 }
 </script>
 
