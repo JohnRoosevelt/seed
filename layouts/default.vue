@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { appName } from '~/constants'
+import { appId, appName } from '~/constants'
 
 const _name = appName
+const _appId = appId
 // const top = ref<HTMLElement | null>(null)
 // let opacity = $(useCssVar('--un-bg-opacity', top))
 // let blur = $(useCssVar('--blur', top))
@@ -24,17 +25,15 @@ const _name = appName
 let _showInstall = $ref(false)
 let _installPrompt: any = null
 onMounted(async () => {
-  console.log('xxxx mouted')
   const relatedApps = await navigator.getInstalledRelatedApps()
 
   // Search for a specific installed platform-specific app
-  const psApp = relatedApps.find(app => app.id === 'seed.lelexue.cn')
+  const psApp = relatedApps.find(app => app.id === _appId)
 
   if (psApp) {
     // Update UI as appropriate
     _showInstall = false
   }
-  console.log(relatedApps, navigator.getInstalledRelatedApps)
 
   window.addEventListener('beforeinstallprompt', (event) => {
     console.log('install before')

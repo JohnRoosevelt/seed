@@ -1,6 +1,6 @@
 import process from 'node:process'
 import type { ModuleOptions } from '@vite-pwa/nuxt'
-import { appDescription, appName } from '../constants/index'
+import { appDescription, appId, appName } from '../constants/index'
 
 const scope = '/'
 
@@ -9,7 +9,7 @@ export const pwa: ModuleOptions = {
   scope,
   base: scope,
   manifest: {
-    id: 'seed.lelexue.cn',
+    id: appId,
     scope,
     name: appName,
     short_name: appName,
