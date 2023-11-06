@@ -21,20 +21,20 @@ const _name = appName
 //   }
 // })
 
-let _showInstall = $$(true)
+let _showInstall = $$(false)
 let _installPrompt: any = null
 onMounted(async () => {
   console.log('xxxx mouted')
-  const relatedApps = await globalThis.navigator.getInstalledRelatedApps()
+  const relatedApps = await navigator.getInstalledRelatedApps()
 
   // Search for a specific installed platform-specific app
-  const psApp = relatedApps.find(app => app.id === 'com.example.myapp')
+  const psApp = relatedApps.find(app => app.id === 'seed.lelexue.cn')
 
   if (psApp) {
     // Update UI as appropriate
     _showInstall = false
   }
-  console.log(relatedApps)
+  console.log(relatedApps, navigator.getInstalledRelatedApps)
 
   window.addEventListener('beforeinstallprompt', (event) => {
     console.log('install before')
@@ -56,6 +56,7 @@ async function _install() {
 
   const result = await _installPrompt.prompt()
   console.log(`Install prompt was: ${result.outcome}`)
+  _showInstall = false
 }
 </script>
 

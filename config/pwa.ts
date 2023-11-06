@@ -9,7 +9,7 @@ export const pwa: ModuleOptions = {
   scope,
   base: scope,
   manifest: {
-    id: scope,
+    id: 'seed.lelexue.cn',
     scope,
     name: appName,
     short_name: appName,
