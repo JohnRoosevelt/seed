@@ -67,14 +67,14 @@ main.min-h-screen.flex-cc.flex-col
   .w-full.flex-bc.h72px.px3.sticky.top-0(
     class="backdrop-blur-[3px] bg-gray-200/[.7]"
   )
-    NuxtLink(to="/").flex-cc.gap-1
+    NuxtLink(to="/" replace).flex-cc.gap-1
       .i-icon-logo.text-5xl
       .hidden(md="block").text-2xl {{_name}}
     ClientOnly
       .text-base.flex-cc.gap-1(v-if="_showInstall" @click="_install")
         span install
         .i-carbon-app.text-3xl
-      NuxtLink(to="/bible" v-else).text-base.flex-cc.gap-1
+      NuxtLink(to="/bible" replace v-else).text-base.flex-cc.gap-1
         span Go to use
         .i-carbon-connect-target.text-3xl
 
