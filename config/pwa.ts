@@ -15,6 +15,11 @@ export const pwa: ModuleOptions = {
     short_name: appName,
     description: appDescription,
     theme_color: '#ffffff',
+    related_applications: [{
+      platform: 'webapp',
+      url: appId,
+      id: appId,
+    }],
     icons: [
       {
         src: 'pwa-192x192.png',

@@ -25,36 +25,36 @@ const _appId = appId
 let _showInstall = $ref(false)
 let _installPrompt: any = null
 onMounted(async () => {
-  const relatedApps = await navigator.getInstalledRelatedApps()
-
-  // Search for a specific installed platform-specific app
-  const psApp = relatedApps.find(app => app.id === _appId)
-
-  if (psApp) {
-    // Update UI as appropriate
-    _showInstall = false
+  try {
+    const relatedApps = await navigator.getInstalledRelatedApps()
+    const psApp = relatedApps.find((app: { id: string }) => app.id === _appId)
+    if (psApp)
+      _showInstall = false
+  }
+  catch (error) {
+    Logger.trace(error)
   }
 
   window.addEventListener('beforeinstallprompt', (event) => {
-    console.log('install before')
+    Logger.log('install before')
     event.preventDefault()
     _installPrompt = event
     _showInstall = true
   })
   window.addEventListener('appinstalled', () => {
-    console.log('install after')
+    Logger.log('install after')
     _installPrompt = null
     _showInstall = false
   })
 })
 
 async function _install() {
-  console.log('install .....', _installPrompt)
+  Logger.log('install .....', _installPrompt)
   if (!_installPrompt)
     return
 
   const result = await _installPrompt.prompt()
-  console.log(`Install prompt was: ${result.outcome}`)
+  Logger.log(`Install prompt was: ${result.outcome}`)
 }
 </script>
 
