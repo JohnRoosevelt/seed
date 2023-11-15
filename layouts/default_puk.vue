@@ -58,43 +58,36 @@ async function _install() {
 }
 </script>
 
-<template>
-  <main min-h-screen flex-cc flex-col>
-    <div sticky top-0 h72px w-full flex-bc px3 class="bg-gray-200/[.7] backdrop-blur-[3px]">
-      <NuxtLink to="/" replace flex-cc gap-1>
-        <div i-icon-logo text-5xl />
-        <div hidden text-2xl md="block">
-          {{ _name }}
-        </div>
-      </NuxtLink>
-      <ClientOnly>
-        <div v-if="_showInstall" flex-cc gap-1 text-base @click="_install">
-          <span> install </span>
-          <span i-carbon-app text-3xl />
-        </div>
-        <NuxtLink v-else to="/bible" replace>
-          <span> Go to use </span>
-          <span i-carbon-connect-target text-3xl />
-        </NuxtLink>
-      </ClientOnly>
-    </div>
+<template lang="pug">
+main.min-h-screen.flex-cc.flex-col
+  //- .w-full.flex-bc.text-4xl.h72px.px3.sticky.top-0.bg-white(
+  //-   ref="top"
+  //-   style="--un-bg-opacity: 0; --blur: 0px; backdrop-filter: blur(var(--blur));"
+  //- )
+  .w-full.flex-bc.h72px.px3.sticky.top-0(
+    class="backdrop-blur-[3px] bg-gray-200/[.7]"
+  )
+    NuxtLink(to="/" replace).flex-cc.gap-1
+      .i-icon-logo.text-5xl
+      .hidden(md="block").text-2xl {{_name}}
+    ClientOnly
+      .text-base.flex-cc.gap-1(v-if="_showInstall" @click="_install")
+        span install
+        .i-carbon-app.text-3xl
+      NuxtLink(to="/bible" replace v-else).text-base.flex-cc.gap-1
+        span Go to use
+        .i-carbon-connect-target.text-3xl
 
-    <div w-full flex-1>
-      <slot />
-    </div>
+  .flex-1.w-full
+    slot
+  .p-7
 
-    <div p7 />
-
-    <div fixed bottom-5 flex-bc gap-10 px-5 py-3 text-sm uppercase text-white class="rounded-[1rem] bg-gray-600/[.4] backdrop-blur-[15rem]">
-      <NuxtLink to="/" active-class="border-b">
-        why
-      </NuxtLink>
-      <NuxtLink to="/what" active-class="border-b">
-        what
-      </NuxtLink>
-      <NuxtLink to="/who" active-class="border-b">
-        who
-      </NuxtLink>
-    </div>
-  </main>
+  .fixed.bottom-5.flex-bc.gap-10.px-5.py-3.text-white.text-sm.uppercase(
+    class="backdrop-blur-[15rem] bg-gray-600/[.4] rounded-[1rem]"
+  )
+    //- NuxtLink(to="/" custom v-slot="{href, navigate, isActive}")
+    //-   p(@click="navigate" :class="[isActive? 'border-b bg-none': '']") what
+    NuxtLink(to="/" active-class="border-b") why
+    NuxtLink(to="/what" activeClass="border-b") what
+    NuxtLink(to="/who" activeClass="border-b") who
 </template>
