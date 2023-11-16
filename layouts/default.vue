@@ -86,13 +86,13 @@ async function _install() {
     <div p7 />
 
     <div fixed bottom-5 flex-bc gap-10 px-5 py-3 text-sm uppercase text-white class="rounded-[1rem] bg-gray-600/[.4] backdrop-blur-[15rem]">
-      <NuxtLink to="/" active-class="border-b">
+      <NuxtLink to="/" replace active-class="border-b">
         why
       </NuxtLink>
-      <NuxtLink to="/what" active-class="border-b">
+      <NuxtLink to="/what" replace active-class="border-b">
         what
       </NuxtLink>
-      <NuxtLink to="/who" active-class="border-b">
+      <NuxtLink to="/who" replace active-class="border-b">
         who
       </NuxtLink>
     </div>
