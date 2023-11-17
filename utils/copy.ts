@@ -5,8 +5,6 @@ export async function copy(value: string) {
   usePermission('clipboard-write')
   await _copy(value)
 
-  if (_text === value) {
-    const len = value.length
-    tip(`${len > 12 ? `${value.substring(0, 5)}...${value.substring(len - 3)}` : value} 已复制`)
-  }
+  if (_text === value)
+    tip(`${value.length > 12 ? `${value.slice(0, 5)}...${value.slice(-3)}` : value} 已复制`)
 }

@@ -1,7 +1,5 @@
 <script setup lang="ts">
-const _wx = 'zjl-yhc'
-const _qq = '2435071576'
-const _email = 'john8.roosevelt@gmail.com'
+
 </script>
 
 <template lang="pug">
@@ -89,9 +87,9 @@ mixin title(text)
   p.mt-2.text-sm.ml-3 如果读者认可本文观点或对扩大影响力有更好的方法，请联系我。
 
   .mt-5.text-sm
-    p(@click="copy(_wx)").text-blue > 微信号： {{ _wx }}
-    p(@click="copy(_qq)").text-blue > QQ： {{ _qq }}
-    p(@click="copy(_email, '邮箱')").text-blue > 邮箱： {{ _email }}
+    p(@click="copy(CONST.wx)").text-blue > 微信号： {{ CONST.wx }}
+    p(@click="copy(CONST.qq)").text-blue > QQ： {{ CONST.qq }}
+    p(@click="copy(CONST.email, '邮箱')").text-blue > 邮箱： {{ CONST.email }}
 
   p.mt-5.text-sm
     i 有朋友告诉我了一个公众号： **研经良助**，可以在安卓手机上下载安装这个 APP 使用。
