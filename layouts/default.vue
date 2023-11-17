@@ -56,6 +56,20 @@ async function _install() {
   const result = await _installPrompt.prompt()
   Logger.log(`Install prompt was: ${result.outcome}`)
 }
+
+const _motion = {
+  initial: {
+    x: 3,
+  },
+  enter: {
+    x: 0,
+    transition: {
+      repeat: Number.POSITIVE_INFINITY,
+      repeatDelay: 1000,
+      repeatType: 'loop',
+    },
+  },
+}
 </script>
 
 <template>
@@ -70,11 +84,11 @@ async function _install() {
       <ClientOnly>
         <div v-if="_showInstall" flex-cc gap-1 text-base @click="_install">
           <span> install </span>
-          <span i-carbon-app text-3xl />
+          <span v-motion="_motion" i-carbon-app text-3xl />
         </div>
         <NuxtLink v-else to="/bible" replace>
           <span> Go to use </span>
-          <span i-carbon-connect-target text-3xl />
+          <span v-motion="_motion" i-carbon-connect-target text-3xl />
         </NuxtLink>
       </ClientOnly>
     </div>
