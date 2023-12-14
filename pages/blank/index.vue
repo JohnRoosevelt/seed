@@ -1,9 +1,9 @@
-<script setup lang="ts">
+<script setup>
 definePageMeta({
   layout: 'blank',
 })
 </script>
 
-<template>
-  install page
+<template lang="pug">
+
 </template>

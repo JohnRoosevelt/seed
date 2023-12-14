@@ -6,7 +6,7 @@ definePageMeta({
 
 <template lang="pug">
 mixin item(url, name, time,text, isGroup)
-  .w-full.bg-white.flex-bc.p-4(@click="$router.push('/chat')")
+  .w-full.bg-white.flex-bc.p-4(@click="$router.push('/blank')")
     if isGroup
       .i-carbon-group-presentation.text-4xl
     else

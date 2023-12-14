@@ -56,7 +56,7 @@ const _motion = {
 
 <template>
   <main min-h-screen flex-cc flex-col>
-    <div sticky top-0 z-9 h72px w-full flex-bc px3 class="bg-gray-200/[.7] backdrop-blur-[3px]">
+    <div sticky top-0 z-9 h72px w-full flex-bc px3 class="bg-gray-50/[.7] backdrop-blur-[3px]">
       <NuxtLink to="/" replace flex-cc gap-1>
         <div i-icon-logo text-5xl />
         <div hidden text-2xl md="block">
