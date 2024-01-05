@@ -1,4 +1,4 @@
 export const Logger = {
   log: console.warn,
-  trace: console.error,
+  trace: console.warn,
 }
