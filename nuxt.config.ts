@@ -15,6 +15,7 @@ export default defineNuxtConfig({
     '@vite-pwa/nuxt',
     '@vueuse/motion/nuxt',
     'dayjs-nuxt',
+    '@vue-macros/nuxt',
   ],
   dayjs: {
     locales: ['en', 'zh-cn'],
