@@ -12,7 +12,8 @@ export const useAccountStore = defineStore('account', () => {
 
   function getCollection(name) {
     // return info
-    return new DB(name)
+    const { getDB } = useDB()
+    return getDB(name)
   }
 
   async function getRelations() {
