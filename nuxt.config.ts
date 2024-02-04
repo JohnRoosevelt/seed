@@ -71,8 +71,8 @@ export default defineNuxtConfig({
       script: [
         { children: 'var global = (global === undefined) ? window : global' },
         { src: 'https://cdnjs.cloudflare.com/ajax/libs/css-doodle/0.38.4/css-doodle.min.js', defer: true },
-        { src: 'https://cdn.jsdelivr.net/npm/pouchdb@8.0.1/dist/pouchdb.min.js', defer: true },
-        { src: 'https://cdn.jsdelivr.net/npm/pouchdb-find@8.0.1/lib/index-browser.es.js', defer: true },
+        // { src: 'https://cdn.jsdelivr.net/npm/pouchdb@8.0.1/dist/pouchdb.min.js', defer: true },
+        // { src: 'https://cdn.jsdelivr.net/npm/pouchdb-find@8.0.1/lib/index-browser.es.js', defer: true },
       ],
     },
   },
@@ -85,7 +85,7 @@ export default defineNuxtConfig({
 
   routeRules: {
     // Homepage pre-rendered at build time
-    '/': { prerender: false },
+    '/': { ssr: false },
     // Product page generated on-demand, revalidates in background
     // '/products/**': { swr: true },
     // // Blog post generated on-demand once until next deploy

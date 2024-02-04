@@ -1,9 +1,9 @@
-// import PouchDB from 'pouchdb'
-// import PouchFind from 'pouchdb-find'
+import PouchDB from 'pouchdb'
+import PouchFind from 'pouchdb-find'
 
-// PouchDB.plugin(PouchFind)
-let PouchDB = null
-let PouchFind = null
+PouchDB.plugin(PouchFind)
+// let PouchDB = null
+// let PouchFind = null
 export function useDB() {
   return {
     async getDB(name) {
@@ -11,14 +11,13 @@ export function useDB() {
       // Logger.log(PouchFind)
       // PouchDB.plugin(PouchFind)
 
-      if (!PouchDB) {
-        PouchDB = (await import('pouchdb')).default
-        PouchFind = (await import('pouchdb-find')).default
-      }
-
-      Logger.log(PouchDB)
-      Logger.log(PouchFind)
-      PouchDB.plugin(PouchFind)
+      // if (!PouchDB) {
+      //   PouchDB = (await import('pouchdb')).default
+      //   PouchFind = (await import('pouchdb-find')).default
+      //   Logger.log(PouchDB)
+      //   Logger.log(PouchFind)
+      //   PouchDB.plugin(PouchFind)
+      // }
 
       return {
         db: new PouchDB(String(name)),
