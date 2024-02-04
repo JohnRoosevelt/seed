@@ -83,7 +83,7 @@ AppBacktop
     template(v-for="(msg, index) of msgs" :key="index")
       .flex.items-stretch.gap-x-2(:class="[msg.fromId === info.id ? 'flex-row-reverse': 'flex-row']" :id="msg._id")
         .flex-cx
-          Avatar(:id="msg.fromId")
+          Avatar(:id="msg.fromId" :name="msg.fromName || info.name")
         .flex-ce.text-base.px-2.py-1.rounded(:class="[msg.fromId === info.id ? 'bg-green text-white': 'bg-gray200 text-black', 'max-w-80%']" v-html="msg.content")
         //- .flex-ce.text-base.px-2.py-1.rounded(class="max-w-75%" :class="[msg.fromId === info.id ? 'bg-blue': 'bg-gray']") {{ msg }}
         //- template

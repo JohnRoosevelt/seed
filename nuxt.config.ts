@@ -69,7 +69,7 @@ export default defineNuxtConfig({
       ],
       script: [
         { children: 'var global = (global === undefined) ? window : global' },
-        { src: 'https://cdnjs.cloudflare.com/ajax/libs/css-doodle/0.38.4/css-doodle.min.js', defer: true },
+        // { src: 'https://cdnjs.cloudflare.com/ajax/libs/css-doodle/0.38.4/css-doodle.min.js', defer: true },
       ],
     },
   },

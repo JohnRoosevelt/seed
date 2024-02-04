@@ -41,7 +41,7 @@ async function _userDel() {
 <template lang="pug">
 .w-full.bg-white.bg-red100.flex-bc.p-4(@click="_onClick")
   .i-carbon-group-presentation.text-4xl(v-if="item.isGroup")
-  Avatar(:id="item._id")(v-else)
+  Avatar(:id="item._id" :name="item.name")(v-else)
   .flex-col.flex-1.ml-2
     .flex-bc.text-xs
       .text-base {{ item.name }}

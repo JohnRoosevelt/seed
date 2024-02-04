@@ -19,7 +19,8 @@
     "crypto-js": "^4.1.1",
     "nanoid": "^5.0.4",
     "pouchdb": "^8.0.1",
-    "pouchdb-find": "^8.0.1"
+    "pouchdb-find": "^8.0.1",
+    "vue3-avatar": "^3.0.0"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^1.0.0-beta.27",

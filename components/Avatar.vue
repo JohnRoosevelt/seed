@@ -1,12 +1,15 @@
 <script setup>
-const { id } = defineProps(['id'])
+import Avatar from 'vue3-avatar'
+
+const { id, name } = defineProps(['id', 'name'])
 </script>
 
 <template>
-  <css-doodle :seed="id" use="var(--rule)" />
+  <!-- <css-doodle :seed="id" use="var(--rule)" /> -->
+  <Avatar :name="`${name} ${id}`" />
 </template>
 
-<style scoped>
+<!-- <style scoped>
 css-doodle {
   --rule: (
     @grid: 1 / 28px;
@@ -19,12 +22,8 @@ css-doodle {
       @size: 4px;
       font-size: 4px;
       color: hsl(@r240, 30%, 50%);
-      box-shadow: @m3x5(
-        calc(4em - @nx * 1em) calc(@ny * 1em) @p(@m3(currentColor),
-        @m2(transparent)),
-        calc(2em + @nx * 1em) calc(@ny * 1em) @lp
-      );
+      box-shadow: @m3x5(calc(4em - @nx*1em) calc(@ny*1em) @p(@m3(currentColor), @m2(transparent)), calc(2em + @nx*1em) calc(@ny * 1em) @lp);
     );
   )
 }
-</style>
+</style> -->
