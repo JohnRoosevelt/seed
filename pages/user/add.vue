@@ -3,18 +3,24 @@ definePageMeta({
   layout: 'blank',
 })
 
+const Router = useRouter()
+
+const { addRelation, getRelationById } = $(useAccountStore())
+
 const form = $ref({
-  id: '',
+  id: '1000008',
   pending: false,
   error: false,
   errorMsg: '',
   disabled: true,
+  rz: [],
 })
 
 watchEffect(() => {
   if (String(form.id).length >= 7) {
     form.errorMsg = ''
     form.error = false
+    form.rz = []
   }
 })
 
@@ -24,21 +30,31 @@ watchEffect(() => {
     form.errorMsg = '帐户长度不能少于 7 位'
 })
 
-const router = useRouter()
-async function _add() {
+async function _find() {
   if (form.disabled)
     return
 
+  const doc = await getRelationById(form.id)
+  if (doc) {
+    form.rz = [doc]
+    // form.rz = [doc].map(i => ({ ...i, id: i._id }))
+    return
+  }
+
   try {
     form.pending = true
-    const rz = await $fetch(`${CONST.apiHost}/user/login`)
+    const rz = await Req(`/account/find`, {
+      method: 'POST',
+      body: { id: form.id },
+    })
 
     if (rz.error) {
       error = true
       tip(rz.message || 'error')
       return
     }
-    router.replace('/user')
+    Logger.log({ rz })
+    form.rz = rz
   }
   catch (e) {
     form.error = true
@@ -48,6 +64,23 @@ async function _add() {
     form.pending = false
   }
 }
+async function _send({ name, _id, id }) {
+  if (_id)
+    return
+  try {
+    const doc = await getRelationById(id)
+    if (!doc) {
+      addRelation({ _id: id, type: 1, name, status: 1, isReq: true })
+      WSReq({ type: 'FRIENDREQ', payload: { toId: id, toName: name } })
+    }
+  }
+  catch (e) {
+    Logger.trace(e)
+  }
+  Router.replace('/')
+}
+
+// onBeforeRouteLeave(() => form.rz = [])
 </script>
 
 <template lang="pug">
@@ -56,7 +89,14 @@ AppBacktop
 .flex-1.w-full.p-5
   input.border.rounded-2.w-full.h-12.px-2(v-model="form.id" type="number" placeholder="请输入 ID")
   .mt-5.text-red {{ form.errorMsg }}
-  button.flex-cc.mt-5.rounded.w-full.h-12(:disabled="form.disabled" :class="form.disabled ? 'text-gray bg-green50' : 'bg-green400'" @click="_add()")
+  button.flex-cc.mt-5.rounded.w-full.h-12(:disabled="form.disabled" :class="form.disabled ? 'text-gray bg-green50' : 'bg-green400'" @click="_find()")
     span.mr-2.flex.i-line-md-loading-twotone-loop(v-if="form.pending")
     span 查找
+  .w-full.mt-5(v-if="form.rz.length")
+    .w-full(v-for="(item, index) of form.rz" :key="index")
+      .w-full.flex-bc
+        .flex-cc.space-x-2
+          .text-xl.i-carbon-image
+          span {{ item.name }}
+        .text-blue.text-sm.px-2.py-1.border.rounded(@click="_send(item)") {{ item._id ? '等待验证': '添加好友' }}
 </template>

@@ -2,6 +2,11 @@ import { pwa } from './config/pwa'
 import { appDescription } from './constants/index'
 
 export default defineNuxtConfig({
+  vue: {
+    compilerOptions: {
+      isCustomElement: tag => ['css-doodle'].includes(tag),
+    },
+  },
   modules: [
     '@vueuse/nuxt',
     '@unocss/nuxt',
@@ -9,7 +14,14 @@ export default defineNuxtConfig({
     '@nuxtjs/color-mode',
     '@vite-pwa/nuxt',
     '@vueuse/motion/nuxt',
+    'dayjs-nuxt',
   ],
+  dayjs: {
+    locales: ['en', 'zh-cn'],
+    plugins: ['relativeTime', 'utc', 'timezone', 'localizedFormat'],
+    defaultLocale: 'zh-cn',
+    defaultTimezone: 'Asia/Shanghai',
+  },
 
   experimental: {
     // when using generate, payload js assets included in sw precache manifest
@@ -54,6 +66,10 @@ export default defineNuxtConfig({
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
         { name: 'description', content: appDescription },
         { name: 'apple-mobile-web-app-status-bar-style', content: 'black-translucent' },
+      ],
+      script: [
+        { children: 'var global = (global === undefined) ? window : global' },
+        { src: 'https://cdnjs.cloudflare.com/ajax/libs/css-doodle/0.38.4/css-doodle.min.js', defer: true },
       ],
     },
   },

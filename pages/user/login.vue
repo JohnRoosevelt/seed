@@ -55,7 +55,7 @@ watchEffect(() => {
 
 async function _login() {
   form.pending = true
-  const rz: any = await $fetch(`${CONST.apiHost}/user/login`, {
+  const rz: any = await Req(`/user/login`, {
     method: 'POST',
     body: { id: form.id, pwd: form.pwd },
   })
@@ -70,6 +70,7 @@ async function _login() {
   info.name = rz.name
   info.token = rz.token
 
+  WS.ws = WS.connect()
   router.replace('/user')
 }
 </script>
