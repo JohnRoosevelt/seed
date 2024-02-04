@@ -5,7 +5,8 @@ export const useAccountStore = defineStore('account', () => {
   /**
    * Current named of the user.
    */
-  const info = $(useStorage('user', { id: '', name: '', token: '' }))
+  // const info = $(useStorage('user', { id: '', name: '', token: '' }))
+  const info = $ref({ id: '', name: '', token: '' })
   let relations = $ref([])
   let msgs = $ref([])
 
