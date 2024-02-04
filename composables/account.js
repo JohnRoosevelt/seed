@@ -10,24 +10,24 @@ export const useAccountStore = defineStore('account', () => {
   let relations = $ref([])
   let msgs = $ref([])
 
-  function getCollection(name) {
+  async function getCollection(name) {
     // return info
     const { getDB } = useDB()
-    return getDB(name)
+    return await getDB(name)
   }
 
   async function getRelations() {
-    const RELATIONS = getCollection('relations')
+    const RELATIONS = await getCollection('relations')
     relations = await RELATIONS.query('createdAt', 'desc')
   }
 
   async function getRelationById(id) {
-    const RELATIONS = getCollection('relations')
+    const RELATIONS = await getCollection('relations')
     return await RELATIONS.get(id)
   }
 
   async function bulkRelation(rz) {
-    const RELATIONS = getCollection('relations')
+    const RELATIONS = await getCollection('relations')
     await RELATIONS.bulkDocs(rz)
     getRelations()
   }
@@ -35,25 +35,25 @@ export const useAccountStore = defineStore('account', () => {
   async function addRelation(msg) {
     if (!msg.createdAt)
       msg.createdAt = Date.now()
-    const RELATIONS = getCollection('relations')
+    const RELATIONS = await getCollection('relations')
     await RELATIONS.add(msg)
     getRelations()
   }
 
   async function removeRelation(id) {
-    const RELATIONS = getCollection('relations')
+    const RELATIONS = await getCollection('relations')
     await RELATIONS.remove(id)
     getRelations()
   }
 
   async function updateRelation(msg) {
-    const RELATIONS = getCollection('relations')
+    const RELATIONS = await getCollection('relations')
     await RELATIONS.update(msg)
     getRelations()
   }
 
   async function getMsgs(id) {
-    const collection = getCollection(String(id))
+    const collection = await getCollection(String(id))
     msgs = await collection.query('createdAt', 'asc')
     nextTick(() => {
       const [lastMsg] = msgs.slice(-1)
@@ -70,7 +70,7 @@ export const useAccountStore = defineStore('account', () => {
     msg.createdAt = msg.createdAt ? msg.createdAt : Date.now()
     msg.sendAt = msg.sendAt ? msg.sendAt : -1
     msg.readAt = msg.readAt ? msg.readAt : -1
-    const collection = getCollection(id)
+    const collection = await getCollection(id)
     const doc = await collection.add(msg)
     await getMsgs(id)
     const relation = await getRelationById(id)
@@ -83,7 +83,7 @@ export const useAccountStore = defineStore('account', () => {
   async function clearMsgs(id) {
     if (!id)
       return
-    const collection = getCollection(id)
+    const collection = await getCollection(id)
     await collection.destroy()
     msgs = []
   }
@@ -91,7 +91,7 @@ export const useAccountStore = defineStore('account', () => {
   async function updateMsg(id, msg) {
     if (!id || !msg)
       return
-    const collection = getCollection(id)
+    const collection = await getCollection(id)
     await collection.update(msg)
     getMsgs(id)
   }
