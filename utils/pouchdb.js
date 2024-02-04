@@ -3,9 +3,8 @@ import PouchFind from 'pouchdb-find'
 
 PouchDB.plugin(PouchFind)
 
-export class Store {
+class DB1 {
   constructor(name) {
-    Logger.log(PouchDB)
     this.db = new PouchDB(name)
   }
 
@@ -160,3 +159,5 @@ export class Store {
     })
   }
 }
+
+export const DB = DB1
