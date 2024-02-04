@@ -146,8 +146,8 @@ PouchDB.plugin(PouchFind)
 // }
 
 export function DB(name) {
-  const db = new PouchDB(String(name))
-  const obj = {
+  return {
+    db: new PouchDB(String(name)),
     async query(prop, sort) {
       try {
         const query = {
@@ -155,7 +155,7 @@ export function DB(name) {
           sort: [],
         }
         if (prop && sort) {
-          await db.createIndex({
+          await this.db.createIndex({
             index: {
               fields: [prop],
             },
@@ -171,7 +171,7 @@ export function DB(name) {
           Logger.error('query must have filed and sort')
           return []
         }
-        const docs = (await db.find(query)).docs
+        const docs = (await this.db.find(query)).docs
         Logger.log(docs)
         return docs
       }
@@ -184,7 +184,7 @@ export function DB(name) {
     async get(id) {
       try {
         Logger.log({ id })
-        const doc = await db.get(id.toString())
+        const doc = await this.db.get(id.toString())
         Logger.log(doc)
         return doc
       }
@@ -206,7 +206,7 @@ export function DB(name) {
 
     async bulkDocs(items) {
       try {
-        const rz = await db.bulkDocs(items)
+        const rz = await this.db.bulkDocs(items)
         Logger.log(rz)
         return rz
       }
@@ -217,7 +217,7 @@ export function DB(name) {
 
     async add(item) {
       try {
-        const doc = await db.post(item)
+        const doc = await this.db.post(item)
         Logger.log(item, doc)
         return doc
       }
@@ -229,7 +229,7 @@ export function DB(name) {
 
     async destroy() {
       try {
-        await db.destroy()
+        await this.db.destroy()
       }
       catch (error) {
         Logger.error(error)
@@ -238,7 +238,7 @@ export function DB(name) {
 
     async update(item) {
       try {
-        const doc = await db.get(item._id)
+        const doc = await this.db.get(item._id)
         Object.assign(doc, item)
         return await db.put(doc)
       }
@@ -250,7 +250,7 @@ export function DB(name) {
 
     async remove(id) {
       try {
-        const doc = await db.get(String(id))
+        const doc = await this.db.get(String(id))
         return await db.remove(doc)
       }
       catch (error) {
@@ -259,5 +259,4 @@ export function DB(name) {
       }
     },
   }
-  return obj
 }
