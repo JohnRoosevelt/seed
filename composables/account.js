@@ -10,6 +10,7 @@ export const useAccountStore = defineStore('account', () => {
   let msgs = $ref([])
 
   function getCollection(name) {
+    return info
     return new Store(String(name))
   }
 
