@@ -1,11 +1,11 @@
 import PouchDB from 'pouchdb'
-
 import PouchFind from 'pouchdb-find'
 
 PouchDB.plugin(PouchFind)
 
 export class Store {
   constructor(name) {
+    Logger.log(PouchDB)
     this.db = new PouchDB(name)
   }
 
