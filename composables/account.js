@@ -11,12 +11,11 @@ export const useAccountStore = defineStore('account', () => {
   let msgs = $ref([])
 
   function getCollection(name) {
-    return info
-    // return new DB(String(name))
+    // return info
+    return new DB(name)
   }
 
   async function getRelations() {
-    // relations = await RELATIONS.getAll()
     const RELATIONS = getCollection('relations')
     relations = await RELATIONS.query('createdAt', 'desc')
   }
@@ -54,7 +53,6 @@ export const useAccountStore = defineStore('account', () => {
 
   async function getMsgs(id) {
     const collection = getCollection(String(id))
-    // msgs = await collection.getAll()
     msgs = await collection.query('createdAt', 'asc')
     nextTick(() => {
       const [lastMsg] = msgs.slice(-1)
