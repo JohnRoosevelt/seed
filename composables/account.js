@@ -6,20 +6,22 @@ export const useAccountStore = defineStore('account', () => {
    * Current named of the user.
    */
   const info = $(useStorage('user', { id: '', name: '', token: '' }))
-  const RELATIONS = new Store('relations')
   let relations = $ref([])
   let msgs = $ref([])
 
   async function getRelations() {
     // relations = await RELATIONS.getAll()
+    const RELATIONS = new Store('relations')
     relations = await RELATIONS.query('createdAt', 'desc')
   }
 
   async function getRelationById(id) {
+    const RELATIONS = new Store('relations')
     return await RELATIONS.get(id)
   }
 
   async function bulkRelation(rz) {
+    const RELATIONS = new Store('relations')
     await RELATIONS.bulkDocs(rz)
     getRelations()
   }
@@ -27,16 +29,19 @@ export const useAccountStore = defineStore('account', () => {
   async function addRelation(msg) {
     if (!msg.createdAt)
       msg.createdAt = Date.now()
+    const RELATIONS = new Store('relations')
     await RELATIONS.add(msg)
     getRelations()
   }
 
   async function removeRelation(id) {
+    const RELATIONS = new Store('relations')
     await RELATIONS.remove(id)
     getRelations()
   }
 
   async function updateRelation(msg) {
+    const RELATIONS = new Store('relations')
     await RELATIONS.update(msg)
     getRelations()
   }
