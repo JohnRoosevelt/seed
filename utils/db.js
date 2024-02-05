@@ -1,5 +1,7 @@
 export async function getDB(name) {
   const { $PouchDB } = useNuxtApp()
+  if (!$PouchDB)
+    return {}
   const db = new $PouchDB(String(name))
   return {
     async query(prop, sort) {

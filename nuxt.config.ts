@@ -2,11 +2,11 @@ import { pwa } from './config/pwa'
 import { appDescription } from './constants/index'
 
 export default defineNuxtConfig({
-  vite: {
-    define: {
-      global: 'window',
-    },
-  },
+  // vite: {
+  //   define: {
+  //     global: 'window',
+  //   },
+  // },
   vue: {
     compilerOptions: {
       isCustomElement: tag => ['css-doodle'].includes(tag),
@@ -74,7 +74,7 @@ export default defineNuxtConfig({
         { name: 'apple-mobile-web-app-status-bar-style', content: 'black-translucent' },
       ],
       script: [
-        // { children: 'var global = (global === undefined) ? window : global' },
+        { children: 'var global = (global === undefined) ? window : global' },
         { src: 'https://cdnjs.cloudflare.com/ajax/libs/css-doodle/0.38.4/css-doodle.min.js', defer: true },
         // { src: 'https://cdn.jsdelivr.net/npm/pouchdb@8.0.1/dist/pouchdb.min.js', defer: true },
         // { src: 'https://cdn.jsdelivr.net/npm/pouchdb-find@8.0.1/lib/index-browser.es.js', defer: true },
