@@ -10,12 +10,15 @@ export const useAccountStore = defineStore('account', () => {
   let relations = $ref([])
   let msgs = $ref([])
 
+  // async function getCollection(name) {
+  //   if (useNuxtApp().$PouchDB)
+  //     return await getDB(name)
+  //   else
+  //     return {}
+  // }
+
   async function getCollection(name) {
-    if (useNuxtApp().$PouchDB) { return await getDB(name) }
-    else {
-      Logger.log('xxxx db not found')
-      return {}
-    }
+    return await getDB(name)
   }
 
   async function getRelations() {
@@ -59,6 +62,8 @@ export const useAccountStore = defineStore('account', () => {
     msgs = await collection.query('createdAt', 'asc')
     nextTick(() => {
       const [lastMsg] = msgs.slice(-1)
+      if (!lastMsg)
+        return
       const element = document.getElementById(lastMsg._id)
       element.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' })
     })
