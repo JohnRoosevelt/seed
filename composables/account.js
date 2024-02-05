@@ -11,7 +11,11 @@ export const useAccountStore = defineStore('account', () => {
   let msgs = $ref([])
 
   async function getCollection(name) {
-    return await getDB(name)
+    if (useNuxtApp().$PouchDB) { return await getDB(name) }
+    else {
+      Logger.log('xxxx db not found')
+      return {}
+    }
   }
 
   async function getRelations() {
