@@ -1,7 +1,7 @@
 export async function getDB(name) {
   const { $PouchDB } = useNuxtApp()
-  if (!$PouchDB)
-    return {}
+  // if (!$PouchDB)
+  //   return {}
 
   const db = new $PouchDB(String(name))
   return {
