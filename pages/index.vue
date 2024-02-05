@@ -3,6 +3,7 @@ definePageMeta({
   layout: 'default',
 })
 const { info: user, relations, getRelations, bulkRelation } = $(useAccountStore())
+
 const router = useRouter()
 
 async function getUserInfo() {

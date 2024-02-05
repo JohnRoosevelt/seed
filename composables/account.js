@@ -11,8 +11,6 @@ export const useAccountStore = defineStore('account', () => {
   let msgs = $ref([])
 
   async function getCollection(name) {
-    // return info
-    const { getDB } = useDB()
     return await getDB(name)
   }
 
